@@ -1,0 +1,108 @@
+AUTHOR: STEVEN C JACKSON
+
+DESCRIPTION: Used to pull results from NCBI
+
+USAGE: Deploy to a web server with PHP5 module
+
+Extract the zip file and deploy to a webserver that has php5.
+The search engine code is in engine.php 
+The rest of the files are html and css files for presentation
+If deployed on your own server and the zip folder root is maintainted point your server to:
+http://www.myserver.com/path/to/8550/index.php
+
+To use the search engine, simply enter a query into the box.
+TO see results from different databases, simply click the tab that has the database name that you would like to search.
+
+Issues:
+Taxonomy and sequence databases yield no results
+
+Tried implementing SOAP via PHP and C#.Net but the connections for both failed. There is not very good documentation for the object necessar to pass to the wsdl for a proper query.
+
+This search engine queries the databases by passing the database name and query term via GET and then parses the returned XML documents to present data to the user in a familiar format.
+
+I added the additional component of linking to the source websites so that the suser may use this site like a traditional search engine and link off to the source page.
+
+
+
+ //NOTES
+        #$client = new SoapClient("http://www.ncbi.nlm.nih.gov/entrez/eutils/soap/v2.0/efetch_pubmed.wsdl");
+        #var_dump($client);
+        #echo "<hr><hr>";
+        #var_dump($client->__getFunctions());
+        #echo "<hr><hr>";
+        #var_dump($client->__getTypes());
+        #echo "<hr><hr>";
+        #$query= array(
+        #  "db" => "",
+        #  "id" => "",
+        #  "query_key" => "",
+        #  "WebEnv" => "",
+        #  "tool" => "",
+        #  "email" => "",
+        #  "retstart" => "",
+        #  "retmax" => "",
+        #  "rettype" => "",
+        #  "strand" => "",
+        #  "seq_start" => "",
+        #  "seq_stop" => "",
+        #  "complexity" => "",
+        #  "report" => ""
+        #);
+        #echo "q1";
+        $query = '
+        <?xml version="1.0" encoding="UTF-8" standalone="no"?><SOAP-
+        ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/
+        envelope/" xmlns:s="http://www.w3.org/2001/XMLSchema"
+        xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://
+        schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/
+        wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+        xmlns:s0="http://www.ncbi.nlm.nih.gov/soap/eutils/" xmlns:wsdl="http://
+        schemas.xmlsoap.org/wsdl/" xmlns:nsef="http://www.ncbi.nlm.nih.gov/
+        soap/eutils/efetch" xmlns:xsi="http://www.w3.org/2001/XMLSchema-
+        instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:tns="http://www.ncbi.nlm.nih.gov/soap/eutils/efetch" >
+        <SOAP-ENV:Body><tns:eFetchRequest xmlns:tns="http://
+        www.ncbi.nlm.nih.gov/soap/eutils/">
+        <tns:db>nucleotide</tns:db>
+        <tns:id>NM_010077</tns:id>
+        <tns:WebEnv></tns:WebEnv>
+        <tns:query_key></tns:query_key>
+        <tns:tool></tns:tool>
+        <tns:email></tns:email>
+        <tns:retstart></tns:retstart>
+        <tns:retmax></tns:retmax>
+        <tns:rettype></tns:rettype>
+        <tns:strand></tns:strand>
+        <tns:seq_start></tns:seq_start>
+        <tns:seq_stop></tns:seq_stop>
+        <tns:complexity></tns:complexity>
+        <tns:report></tns:report>
+        </tns:eFetchRequest>
+        </SOAP-ENV:Body></SOAP-ENV:Envelope>
+        ';*/
+        #echo "q2";
+
+
+
+
+
+        #$results = $client->__call("run_eFetch", $query);
+        #echo "q3";
+        #print_r($client->__getLastRequest());
+        #print_r($client);
+        #print_r($client->__call("run_eFetch", "test"));
+        #print($client->efetch("atg"));
+        /*<s:element name="db" type="s:string"/>
+        <s:element name="id" type="s:string"/>
+        <s:element name="query_key" type="s:int"/>
+        <s:element name="WebEnv" type="s:string"/>
+        <s:element name="tool" type="s:string"/>
+        <s:element name="email" type="s:string"/>
+        <s:element name="retstart" type="s:int"/>
+        <s:element name="retmax" type="s:int"/>
+        <s:element name="rettype" type="s:string"/>
+        <s:element name="strand" type="s:int"/>
+        <s:element name="seq_start" type="s:int"/>
+        <s:element name="seq_stop" type="s:int"/>
+        <s:element name="complexity" type="s:int"/>
+        <s:element name="report" type="s:string"/>
